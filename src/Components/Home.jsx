@@ -2,6 +2,7 @@ import React, { useContext } from 'react'
 import UploadImage from './UploadImage'
 import ImgPreview from './ImgPreview'
 import { dataContext } from '../context/Context'
+import { enhancedImageAPI } from '../utils/enhanceImageApi'
 
 
 
@@ -15,7 +16,7 @@ const Home = () => {
     try{
       // code which may produce error
       const enhancedURL = await enhancedImageAPI(file)
-      setEnhancedImage(enhancedURL)
+      setEnhancedImage(enhancedURL.image)
       setLoading(false)
 
     }
