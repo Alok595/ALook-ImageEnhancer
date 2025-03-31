@@ -1,7 +1,10 @@
 import axios from "axios";
 
-const API_KEY = "wx5gpab8q754d52ci";
-const BASE_URL = "https://techhk.aoscdn.com/";
+const API_KEY = import.meta.env.VITE_API_KEY;
+const BASE_URL = import.meta.env.VITE_BASE_URL.replace(/['"]+/g, ""); // Remove quotes if necessary
+
+const MAXIMUM_RETRIES = 20;
+
 export const enhancedImageAPI = async (file) => {
   // code to call api and get enhanced image url
 
@@ -44,6 +47,23 @@ const uploadImage = async (file) => {
   return data.data.task_id;
 };
 
+const pollForEnhancedImage = async (taskId, retries = 0) => {
+  const result = await fetchEnhancedImage(taskId);
+
+  if (result.state === 4) {
+    console.log(`processing...(${retries}/${MAXIMUM_RETRIES})`);
+
+    if (retries >= MAXIMUM_RETRIES) {
+      throw new Error("Max retries Reached . please try agian later.");
+    }
+    // wait for 2 secionds
+    await new Promise((resolve) => setTimeout(resolve, 2000));
+    return pollForEnhancedImage(taskId, retries + 1);
+  }
+  console.log("Enhaned Image URL", result);
+  return result;
+};
+
 const fetchEnhancedImage = async (taskId) => {
   //fetch enhance image
   // "/api/tasks/visual/scale/{task_id}"
@@ -62,23 +82,6 @@ const fetchEnhancedImage = async (taskId) => {
   }
 
   return data.data;
-};
-
-const pollForEnhancedImage = async (taskId, retries = 0) => {
-  const result = await fetchEnhancedImage(taskId);
-
-  if (result.state === 4) {
-    console.log("processing...");
-
-    if (retries >= 20) {
-      throw new Error("Max retries Reached . please try agian later.");
-    }
-    // wait for 2 secionds
-    await new Promise((resolve) => setTimeout(resolve, 2000));
-    return pollForEnhancedImage(taskId, retries + 1);
-  }
-  console.log("Enhaned Image URL",result)
-  return result
 };
 
 // {

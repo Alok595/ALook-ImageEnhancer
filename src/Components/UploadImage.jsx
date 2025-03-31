@@ -14,7 +14,7 @@ const showImageHandler = (e)=>{
 
 
   return (
-    <div className="bg-white shadow-lg rounded-2xl p-6 w-full max-w-2xl">
+    <div className="bg-gray-200 shadow-lg rounded-2xl p-6 w-full max-w-2xl shadow-black">
       <label
         htmlFor="fileInput"
         className="block w-full cursor-pointer border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-blue-500 transition-all"

@@ -1,15 +1,13 @@
 import React from "react";
 import Home from "./Components/Home";
+import Header from "./Components/Header";
 
 const App = () => {
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 py-8 px-4">
-      <header className="text-center mb-8">
-        <h1 className="text-5xl font-bold text-gray-800 mb-2">ALook:The AI Image Enhancer </h1>
-        <p className="text-lg text-gray-500">"Upload Your Image & Let AI Work Its Magic—Enhanced in Seconds!"</p>
-      </header>
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-800 py-8 px-4">
+     <Header/>
       <Home />
-      <footer className="text-lg text-gray-500 mt-6">Powered By @AlokRanjan</footer>
+      <footer className="text-lg text-gray-300 mt-6">Powered By @AlokRanjan</footer>
     </div>
   );
 };

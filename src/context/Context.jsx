@@ -5,22 +5,18 @@ export const dataContext = createContext();
 const Context = ({ children }) => {
   const [uploadImage, setUploadImage] = useState(null);
   const [enhancedImage, setEnhancedImage] = useState(null);
-  const [loading,setLoading] = useState(false)
-
-  
-  
-
-  
-  
-
+  const [loading, setLoading] = useState(false);
+  const [index, setIndex] = useState(0);
 
   let value = {
     uploadImage,
     setUploadImage,
     enhancedImage,
     setEnhancedImage,
-    loading,setLoading
-   
+    loading,
+    setLoading,
+    index,
+    setIndex,
   };
   return (
     <div>
